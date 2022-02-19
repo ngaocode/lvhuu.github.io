@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tạo USB BOOT & Cài đặt Windows 10</title>
+</head>
+<body> <center>
+    <p style="font-size :20px; font-weight: bold; color: black;">
+        TẠO USB BOOT CÀI ĐẶT HỆ ĐIỀU HÀNH WINDOWS 7, 10 </p></center>
+    <p>
+        <b>Bước 1:</b> Tải phần mềm Rufus mới nhất bằng cách nhấn<a href="https://rufus.ie/vi/"> vào đây </a>
+
+        .<i>  Sau đó di chuyển xuống mục Download >Sau đó chọn vào link tải Rufus đầu tiên. </i> 
+    
+    </p> <center>
+    <img src="./rufus1.jpg" width="500" height="500"></center>
+    <p>
+        <b>Bước 2:</b> Khởi động Rufus vừa tải về, thấy giao diện chính của phần mềm như sau.<i> Lúc này hãy nhớ kết nối USB với máy tính vừa cài đặt Rufus nhé!</i>
+    </p><center>
+    <img src="./rufus2.jpg" width="400" height="500"></center>
+    <p>
+        <b>Bước 3:</b> Trên giao diện chính của phần mềm tạo USB Boot WIN Rufus,   thao tác theo hình hướng dẫn sau: <br /> <br />
+           <i> •(1): Chọn vào tên USB của .<br /> 
+            •(2): Nhấn vào SELECT để chọn file ISO (file cài đặt) Windows 7 hoặc Windows 10   đã tải về trước đó. <br />
+            •(3): Partition scheme: Lúc này   cần nhấn tổ hợp phím Alt + E để kích hoạt tính năng ẩn tạo USB 2 phân vùng. <br />
+            •(4): Target system: Hệ thống tự động chọn vào BIOS or UEFI. <br />
+            •(5): Volume Lable: Đặt tên USB Boot của  , gợi ý hãy đặt tên sao cho có ý nghĩa nhất, ví dụ: USB CAI WIN 10. <br />
+            •(6): File System: Chọn NTFS (khuyến nghị).</i>
+    </p> <center>
+    <img src="./rufus3.jpg" width="400" height="500"></center>
+    <p>
+       <b> Bước 4:</b> Nhấn START để bắt đầu quá trình tạo USB Boot để cài WIN 7, 10 cho máy tính, laptop.
+
+    </p><center>
+    <img src="./rufus4.jpg" width="400" height="200"></center>
+    <p><center><i>Lúc này Rufus hỏi   có muốn format (xóa dữ liệu) USB hay không?<br /> Hãy nhấn OK để bắt đầu quá trình xóa và tạo USB Boot nhé!</i> </center> </p>
+
+    <p><b>Bước 5:</b> Nếu quá trình tạo USB Boot hoàn tất, sẽ nhận được thông báo READ màu xanh. </p> <center>
+    <img src="./rufus5.jpg" width="400" height="500"></center>
+    <p><b><i><center>Lưu ý: Trong quá trình tạo USB Boot nếu gặp lỗi thì rất có thể file ISO (bộ cài đặt Windows) đã bị lỗi,<br /> hoặc USB đang để chế độ chỉ đọc (tìm thanh gạt trên USB để chuyển sang chế độ đọc/ghi). 
+    </center> </i> </b>  <br /> <br />
+        <b>Bước 6:</b> Sau khi tạo USB Boot Win 7 hoặc Win 10 thành công, có thể sử dụng chúng để tự cài đặt hệ điều hành! 
+    </p>
+    <center>
+    <p style="font-size :20px; font-weight: bold; color: black;">
+        BOOT USB TRÊN MÁY ẢO VIRTUALBOX </p></center>
+    <P>
+       <b> Bước 1: <i>Cần phải nhận dạng được USB đang được sử dụng là ổ đĩa số bao nhiêu.  </i></b>
+        Vào <b>Run,</b> nhập <b> “diskmgmt.msc”</b> để mở <b>Disk Management.<br /></b> Hoặc nhấp chuột phải vào<b> My Computer (This PC</b> đối với Windows 8.1/10), chọn <b>Manage</b>, sẽ nhìn thấy<b> Disk Management. </b>
+        <center>
+            <img src="./boot1.jpg" width="500" height="400" >  </center>
+    </P>
+    <p>
+        <b>Bước 2:</b>cần phải tạo ra một file đĩa ảo (VMDK) và trỏ nó tới ổ đĩa USB. Sử dụng file đĩa ảo này như một ổ cứng trong VirtualBox.
+       <br /> <br />
+        Mở <b>Command Prompt</b> hoặc tìm kiếm <b>cmd</b> ở nút <b>Start</b>, sau đó nhấp chuột phải và chọn<b> Run as administrator</b>. <br /> Di chuyển đến thư mục cài đặt của VirtualBox, mặc định là <i>C:\Program Files\Oracle\VirtualBox</i>.<br /> Mục đích của việc di chuyển đến thư mục này là để sử dụng lệnh <i>VBoxManage</i>. <br />Có thể không cần di chuyển mà vẫn sử dụng được lệnh đó bằng cách nhập đường dẫn đầy đủ cho<i> VBoxManage</i>. <br />
+        Sử dụng lệnh sau để di chuyển đến thư mục cài đặt VirtualBox, thư mục này chứa file<i> VBoxManage: </i>
+        cd%programfiles%\Oracle\VirtualBoxb
+        <p>
+            Tiếp theo, Cần sử dụng lệnh sau để tạo ra file đĩa ảo:<i>
+            VBoxManage internalcommands createrawvmdk -filename C:\usb.vmdk -rawdisk \\.\PhysicalDrive *
+          </i>  <br />
+            Phải thay đổi số của ổ đĩa mà đã kiểm tra trước đó. * USB của mình là Disk 1 thì mình để PhysicalDrive, nếu Disk 2 thì để PhysicalDrive 2 nhé. <br /> Có thể thay đổi tên và đường dẫn của file đĩa ảo theo ý mình. Ở đây munhf tạo file C:\usb.vmdk. <br/>Nếu chọn tên file có dấu cách thì nhớ đặt nó trogn dấu " " nhé,  ví dụ "C:\usb 2.vmdk" .
+            <br /> </p>
+            <center>
+            <img src="boot2.jpg"</center>
+        <p>
+            Nếu thấy thông báo như sau là đã thành công:
+            RAW host disk access VMDK file C:\usb.vmdk created successfully.</p>
+
+
+        </p>
+
+
+    </p>
+
+
+</body>
+</html>
